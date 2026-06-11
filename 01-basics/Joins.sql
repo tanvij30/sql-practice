@@ -39,3 +39,16 @@ from Employee  as e
 left join Bonus as b
 on e.empId = b.empId
 where b.bonus < 1000 OR b.bonus IS NULL
+
+
+-- Problem: The Number of Employees Which Report to Each Employee
+-- Source: LeetCode
+-- Difficulty: Easy 
+-- Concept: Joins, Null checks 
+-- Approach: Used self join
+select m.employee_id, m.name, count(e.employee_id) as reports_count, Round(AVG(e.age)) as average_age
+from employees as e 
+join employees as m 
+on e.reports_to = m.employee_id
+group by m.employee_id, m.name
+order by m.employee_id
